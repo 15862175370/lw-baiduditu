@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        liwei {
+            keyAlias 'liwei'
+            keyPassword 'android'
+            storeFile file('F:/keystore/liwei.keystore')
+            storePassword 'android'
+        }
+    }
+    compileSdkVersion 24
+    buildToolsVersion "23.0.1"
+    defaultConfig {
+        applicationId "com.example.asus.baidu"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.liwei
+        }
+        debug {
+            signingConfig signingConfigs.liwei
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:1.0.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile project(':baidumap')
+}
